@@ -9,13 +9,11 @@ transform = Transform3D(23.1891, 0, 0, 0, -0.0453876, 0, 0, 0, 6.46187, 0, -0.02
 use_collision = true
 size = Vector3(1, 0.001, 1)
 
-[node name="Node3D" parent="." node_paths=PackedStringArray("head", "cam", "ap", "shapeCast") instance=ExtResource("1_u2kjj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.210345, 0.391457, 0.0575805)
-head = NodePath("Head")
-cam = NodePath("Head/Camera3D")
-ap = NodePath("AnimationPlayer")
-shapeCast = NodePath("ShapeCast3D")
-
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 5.03088, -1.51512, 2.05527, 0)
 use_collision = true
+
+[node name="Node3D" parent="." node_paths=PackedStringArray("cam", "ap", "shapeCast") instance=ExtResource("1_u2kjj")]
+cam = NodePath("Head/Camera3D")
+ap = NodePath("AnimationPlayer")
+shapeCast = NodePath("ShapeCast3D")

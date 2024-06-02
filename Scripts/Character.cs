@@ -7,16 +7,16 @@ public partial class Character : CharacterBody3D
 	public const float CrouchSpeed = 2.5f;
 	public const float JumpVelocity = 4.5f;
 	public const float sensitivity = 0.01f;
-	public bool crouched;
+	public bool Crouched;
 	
 	
 	[ExportGroup("Properties")]
 	[Export]
-	public Node3D head;
+	public Node3D Head;
 	[Export]
-	public Camera3D cam;
+	public Camera3D Cam;
 	[Export]
-	public AnimationPlayer ap;
+	public AnimationPlayer AnimPlayer;
 	[Export]
 	public ShapeCast3D shapeCast;
 	
@@ -31,29 +31,29 @@ public partial class Character : CharacterBody3D
 		if(@event is InputEventMouseMotion) //Handle Mouse Input
 		{
 			InputEventMouseMotion mouseMotion = @event as InputEventMouseMotion;
-			head.RotateY(-mouseMotion.Relative.X * sensitivity);
-			cam.RotateX(-mouseMotion.Relative.Y * sensitivity);
+			Head.RotateY(-mouseMotion.Relative.X * sensitivity);
+			Cam.RotateX(-mouseMotion.Relative.Y * sensitivity);
 			
-			Vector3 cameraRot = cam.Rotation;
-			cameraRot.X = Mathf.Clamp(cameraRot.X,Mathf.DegToRad(-80f),Mathf.DegToRad(80f));
-			cam.Rotation = cameraRot;
+			Vector3 CameraRot = Cam.Rotation;
+			CameraRot.X = Mathf.Clamp(CameraRot.X,Mathf.DegToRad(-80f),Mathf.DegToRad(80f));
+			Cam.Rotation = CameraRot;
 		}
 		else if(@event.IsActionPressed("Crouch")) //Handle Crouching
 		{
 			if (Input.IsActionPressed("Crouch"))
 			{
-				if(crouched == false)
+				if(Crouched == false)
 				{
 				Speed = CrouchSpeed;
-				ap.Play("CrouchAnim");
-				crouched = true;
+				AnimPlayer.Play("CrouchAnim");
+				Crouched = true;
 				}
-				else if(crouched == true)
+				else if(Crouched == true)
 				{
-					if(crouched == true && shapeCast.IsColliding() == false)
+					if(Crouched == true && shapeCast.IsColliding() == false)
 					{
-					ap.Play("unCrouchAnim");
-					crouched = false;
+					AnimPlayer.Play("unCrouchAnim");
+					Crouched = false;
 					Speed = 5.0f;
 					}
 				}
@@ -82,7 +82,7 @@ public partial class Character : CharacterBody3D
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
 		Vector2 inputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
-		Vector3 direction = (head.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+		Vector3 direction = (Head.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 		if (direction != Vector3.Zero)
 		{
 			velocity.X = direction.X * Speed;
