@@ -359,7 +359,7 @@ disabled = true
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1.01613, 0, 0, 0, 1, 0, 1.6325, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="Camera3D" type="Camera3D" parent="Head" groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 0.984126, 0, 0, 0, 1, 0, -0.0764664, 0)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera3D"]

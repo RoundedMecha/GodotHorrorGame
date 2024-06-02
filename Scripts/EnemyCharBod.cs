@@ -13,7 +13,11 @@ public partial class EnemyCharBod : CharacterBody3D
 	float Speed = 3.0f;
 	[Export]
 	Timer WaitTimer;
-	int CurrentWaypoint;
+	[Export]
+	MeshInstance3D Head;
+	
+	int CurrentWaypoint; //Waypoint Array Index
+	bool PlayerInHearRangeFar, PlayerInHearRangeClose,PlayerInSightRangeFar,PlayerInSightRangeClose; //Bools For Seeing/Hearing Player
 	
 	
 	enum States
@@ -45,6 +49,11 @@ public partial class EnemyCharBod : CharacterBody3D
 				FaceDirection(TargetPos);
 				Velocity = Direction * Speed;
 				MoveAndSlide();
+				
+				if(PlayerInHearRangeFar == true)
+				{
+					CheckForPlayer();
+				}
 				 break;
 			case(States.Waiting): break;
 			case(States.Hunting): break;
@@ -53,6 +62,30 @@ public partial class EnemyCharBod : CharacterBody3D
 		}
 			
 	}
+	
+		public void CheckForPlayer() //CheckPlayer Checks Crouch or Not
+		{
+			var SpaceState = GetWorld3D().DirectSpaceState;
+			var Querry = PhysicsRayQueryParameters3D.Create(Head.GlobalPosition,GetTree().GetNodesInGroup("Player")[0].GetNode<Camera3D>("Head/Camera3D").GlobalPosition);
+			Querry.Exclude = new Godot.Collections.Array<Rid>{GetRid()};
+			var Result = new Godot.Collections.Dictionary{};
+			Result = SpaceState.IntersectRay(Querry);
+			
+			
+			if (Result.Count > 0 )
+			{
+				if (GetTree().GetNodesInGroup("Player").Contains((Node)Result["collider"]))
+				{
+					if(PlayerInHearRangeClose == true)
+					{
+						
+						GD.Print("RAYCAST BAD");
+					}
+					
+				}
+			}
+			
+		}
 	
 		public void OnWaitTimeOut() //WaitTimeSignalThenChangeState
 		{
@@ -77,7 +110,7 @@ public partial class EnemyCharBod : CharacterBody3D
 		{
 			if(body.IsInGroup("Player"))
 			{
-				GD.Print("PLAYERHEAR");
+				PlayerInHearRangeFar = true;
 			}
 			
 		}
@@ -85,7 +118,7 @@ public partial class EnemyCharBod : CharacterBody3D
 		{
 			if(body.IsInGroup("Player"))
 			{
-				GD.Print("PLAYGONE");
+				PlayerInHearRangeFar = false;
 			}
 			
 		}
@@ -93,7 +126,7 @@ public partial class EnemyCharBod : CharacterBody3D
 		{
 			if(body.IsInGroup("Player"))
 			{
-				GD.Print("PLAYTOOCLOSE");
+				PlayerInHearRangeClose = true;
 			}
 			
 		
@@ -102,7 +135,7 @@ public partial class EnemyCharBod : CharacterBody3D
 		{
 			if(body.IsInGroup("Player"))
 			{
-				GD.Print("PLAYTOOCLOSEEXIT");
+				PlayerInHearRangeClose = false;
 			}
 		
 		}
@@ -110,28 +143,28 @@ public partial class EnemyCharBod : CharacterBody3D
 		{
 			if(body.IsInGroup("Player"))
 			{
-				GD.Print("PLAYERSEECLOSE");
+				PlayerInSightRangeClose = true;
 			}
 		}
 		public void OnSightCloseAreaBodyExit(Node3D body)
 		{
 			if(body.IsInGroup("Player"))
 			{
-				GD.Print("PLAYSEETOOCLOSEEXIT");
+				PlayerInSightRangeClose = false;
 			}
 		}
 		public void OnSightFarAreaBodyEntered(Node3D body)
 		{
 			if(body.IsInGroup("Player"))
 			{
-				GD.Print("PLAYERFARSEE");
+				PlayerInSightRangeFar = true;
 			}
 		}
 		public void OnSightFarAreaBodyExit(Node3D body)
 		{
 			if(body.IsInGroup("Player"))
 			{
-				GD.Print("PLAYTFARSEEEEXIT");
+				PlayerInSightRangeFar = false;
 			}
 		}
 	

@@ -14,12 +14,13 @@ points = PackedVector3Array(0, 0, 0, -1, 0, -1, 1, 1, -1, 1, 0, -1, -1, 1, -1, -
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hn7lt"]
 points = PackedVector3Array(0, 0, 0, -4, 0, -1, 4, 1, -1, 4, 0, -1, -4, 1, -1, -8, 0, -10, 8, 0, -10, -8, 1, -10, 8, 1, -10)
 
-[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent3D", "Waypoints", "WaitTimer")]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent3D", "Waypoints", "WaitTimer", "Head")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13935, 0)
 script = ExtResource("1_x5c63")
 NavAgent3D = NodePath("NavigationAgent3D")
 Waypoints = []
 WaitTimer = NodePath("WaitTime")
+Head = NodePath("Head")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_trb7o")
@@ -28,7 +29,7 @@ shape = SubResource("CapsuleShape3D_trb7o")
 mesh = SubResource("CapsuleMesh_jxsiu")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="Head" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.556806, -5.46341e-08, -2.10826e-15, 0, -2.7317e-08, 0.551702, -4.86775e-08, 0.624941, 2.41157e-08, 0.083, 0.455, -0.166088)
 mesh = SubResource("CapsuleMesh_jxsiu")
 skeleton = NodePath("")
