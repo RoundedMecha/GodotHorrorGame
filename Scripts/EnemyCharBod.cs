@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+
 public partial class EnemyCharBod : CharacterBody3D
 {
 	
@@ -16,9 +17,11 @@ public partial class EnemyCharBod : CharacterBody3D
 	[Export]
 	MeshInstance3D Head;
 	
+	
 	int CurrentWaypoint; //Waypoint Array Index
 	bool PlayerInHearRangeFar, PlayerInHearRangeClose,PlayerInSightRangeFar,PlayerInSightRangeClose; //Bools For Seeing/Hearing Player
 	
+
 	
 	enum States
 	{
@@ -35,6 +38,7 @@ public partial class EnemyCharBod : CharacterBody3D
 	{
 		CurrentState = States.Patrol;
 		NavAgent3D.SetTargetPosition(Waypoints[0].GlobalPosition);
+		GD.Print(GetNode<Character>($"../Node3D").Speed); ///THIS IS IMPORTANT USE FOR STATE CHANGING AN BOOLEAN CHECKING CHARACTER SHOULD PROBABLY USE DIFFERENT SYSTEM LATER
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -79,7 +83,7 @@ public partial class EnemyCharBod : CharacterBody3D
 					if(PlayerInHearRangeClose == true)
 					{
 						
-						GD.Print("RAYCAST BAD");
+						
 					}
 					
 				}
