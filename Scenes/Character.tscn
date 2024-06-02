@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://dx6e2aakd1c1e"]
+[gd_scene load_steps=11 format=3 uid="uid://dx6e2aakd1c1e"]
 
 [ext_resource type="Script" path="res://Scripts/Character.cs" id="1_e7wf0"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_e5j7r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gcfgp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0tmo5"]
 
 [sub_resource type="Animation" id="Animation_2711p"]
 resource_name = "CrouchAnim"
@@ -125,6 +127,50 @@ tracks/4/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Head/Camera3D/SpotLight3D:light_energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Head/Camera3D/SpotLight3D:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Head/Camera3D/SpotLight3D:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Head/Camera3D/SpotLight3D:position:z")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_1xxt3"]
 resource_name = "unCrouchAnim"
@@ -186,21 +232,115 @@ tracks/4/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_2efo5"]
+resource_name = "ShowTorch"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/SpotLight3D:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D/SpotLight3D:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.649763, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Head/Camera3D/SpotLight3D:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-1.29915, -0.25, 0, 0.25, 0, -0.327056, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Head/Camera3D/SpotLight3D:position:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.904495, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_eo3nj"]
+resource_name = "HideTorch"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/SpotLight3D:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D/SpotLight3D:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-0.65, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Head/Camera3D/SpotLight3D:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-0.327, -0.25, 0, 0.25, 0, -1.299, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Head/Camera3D/SpotLight3D:position:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-0.904, -0.25, 0, 0.25, 0, -0.904, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7jcu1"]
 _data = {
 "CrouchAnim": SubResource("Animation_2711p"),
+"HideTorch": SubResource("Animation_eo3nj"),
 "RESET": SubResource("Animation_pt8tk"),
+"ShowTorch": SubResource("Animation_2efo5"),
 "unCrouchAnim": SubResource("Animation_1xxt3")
 }
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_0tmo5"]
-
-[node name="Node3D" type="CharacterBody3D" node_paths=PackedStringArray("head", "cam", "ap", "shapeCast")]
+[node name="Node3D" type="CharacterBody3D" node_paths=PackedStringArray("Head", "Cam", "AnimPlayer", "shapeCast")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.414105, 0)
 script = ExtResource("1_e7wf0")
-head = NodePath("Head")
-cam = NodePath("Head/Camera3D")
-ap = NodePath("AnimationPlayer")
+Head = NodePath("Head")
+Cam = NodePath("Head/Camera3D")
+AnimPlayer = NodePath("AnimationPlayer")
 shapeCast = NodePath("ShapeCast3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -222,12 +362,19 @@ transform = Transform3D(1, 0, 0, 0, 1.01613, 0, 0, 0, 1, 0, 1.6325, 0)
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 0.984126, 0, 0, 0, 1, 0, -0.0764664, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_7jcu1")
-}
+[node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera3D"]
+light_energy = 0.0
+spot_range = 8.17879
+spot_angle = 42.2836
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84393, 0)
 shape = SubResource("SphereShape3D_0tmo5")
 debug_shape_custom_color = Color(0.628169, 0.000301972, 0.6308, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7jcu1")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimationPlayerAnimationFinished"]

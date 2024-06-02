@@ -8,6 +8,8 @@ public partial class Character : CharacterBody3D
 	public const float JumpVelocity = 4.5f;
 	public const float sensitivity = 0.01f;
 	public bool Crouched;
+	public bool busy;
+	public bool LightVis;
 	
 	
 	[ExportGroup("Properties")]
@@ -19,6 +21,15 @@ public partial class Character : CharacterBody3D
 	public AnimationPlayer AnimPlayer;
 	[Export]
 	public ShapeCast3D shapeCast;
+	
+	public void OnAnimationPlayerAnimationFinished(string AnimName)
+	{
+		if(AnimName == "CrouchAnim")
+		{
+			GD.Print("FIN");
+		}
+		
+	}
 	
 	public override void _Ready()
 	{
@@ -45,19 +56,30 @@ public partial class Character : CharacterBody3D
 				if(Crouched == false)
 				{
 				Speed = CrouchSpeed;
-				AnimPlayer.Play("CrouchAnim");
+				AnimPlayer.Queue("CrouchAnim");
 				Crouched = true;
 				}
 				else if(Crouched == true)
 				{
 					if(Crouched == true && shapeCast.IsColliding() == false)
 					{
-					AnimPlayer.Play("unCrouchAnim");
+					AnimPlayer.Queue("unCrouchAnim");
 					Crouched = false;
 					Speed = 5.0f;
 					}
 				}
 			}	
+		}
+		else if(@event.IsActionPressed("Torch"))
+		{
+			GD.Print("TEST");
+			if(LightVis == true)
+			{
+				AnimPlayer.Queue("HideTorch");
+				LightVis = false;
+				
+			}
+			else{ AnimPlayer.Queue("ShowTorch"); LightVis = true;}
 		}
 	}
 	
