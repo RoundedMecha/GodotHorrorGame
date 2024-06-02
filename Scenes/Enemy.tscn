@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7ifsi6o73brp"]
+
+[ext_resource type="Script" path="res://Scripts/EnemyCharBod.cs" id="1_x5c63"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_trb7o"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jxsiu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_21jcc"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_klnpr"]
+points = PackedVector3Array(0, 0, 0, -1, 0, -1, 1, 1, -1, 1, 0, -1, -1, 1, -1, -2, 0, -5, 2, 0, -5, -2, 1, -5, 2, 1, -5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hn7lt"]
+points = PackedVector3Array(0, 0, 0, -4, 0, -1, 4, 1, -1, 4, 0, -1, -4, 1, -1, -8, 0, -10, 8, 0, -10, -8, 1, -10, 8, 1, -10)
+
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent3D", "Waypoints", "WaitTimer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13935, 0)
+script = ExtResource("1_x5c63")
+NavAgent3D = NodePath("NavigationAgent3D")
+Waypoints = []
+WaitTimer = NodePath("WaitTime")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_trb7o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_jxsiu")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.556806, -5.46341e-08, -2.10826e-15, 0, -2.7317e-08, 0.551702, -4.86775e-08, 0.624941, 2.41157e-08, 0.083, 0.455, -0.166088)
+mesh = SubResource("CapsuleMesh_jxsiu")
+skeleton = NodePath("")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="WaitTime" type="Timer" parent="."]
+one_shot = true
+
+[node name="HearFarArea" type="Area3D" parent="."]
+
+[node name="HearFar" type="CollisionShape3D" parent="HearFarArea"]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
+shape = SubResource("SphereShape3D_21jcc")
+
+[node name="HearCloseArea" type="Area3D" parent="."]
+
+[node name="HearClose" type="CollisionShape3D" parent="HearCloseArea"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+shape = SubResource("SphereShape3D_21jcc")
+
+[node name="SightClose" type="Area3D" parent="."]
+
+[node name="SightCone" type="CollisionShape3D" parent="SightClose"]
+visible = false
+shape = SubResource("ConvexPolygonShape3D_klnpr")
+
+[node name="SightFar" type="Area3D" parent="."]
+
+[node name="SightFar" type="CollisionShape3D" parent="SightFar"]
+shape = SubResource("ConvexPolygonShape3D_hn7lt")
+
+[connection signal="timeout" from="WaitTime" to="." method="OnWaitTimeOut"]
+[connection signal="body_entered" from="HearFarArea" to="." method="OnHearFarAreaBodyEntered"]
+[connection signal="body_exited" from="HearFarArea" to="." method="OnHearFarAreaBodyExit"]
+[connection signal="body_entered" from="HearCloseArea" to="." method="OnHearCloseAreaBodyEntered"]
+[connection signal="body_exited" from="HearCloseArea" to="." method="OnHearCloseAreaBodyExit"]
+[connection signal="body_entered" from="SightClose" to="." method="OnSightCloseAreaBodyEntered"]
+[connection signal="body_exited" from="SightClose" to="." method="OnSightCloseAreaBodyExit"]
+[connection signal="body_entered" from="SightFar" to="." method="OnSightFarAreaBodyEntered"]
+[connection signal="body_exited" from="SightFar" to="." method="OnSightFarAreaBodyExit"]

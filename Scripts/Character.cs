@@ -22,9 +22,9 @@ public partial class Character : CharacterBody3D
 	[Export]
 	public ShapeCast3D shapeCast;
 	
-	public void OnAnimationPlayerAnimationFinished(string AnimName)
+	public void OnAnimationPlayerAnimationFinished(string anim_name)
 	{
-		if(AnimName == "CrouchAnim")
+		if(anim_name == "CrouchAnim")
 		{
 			GD.Print("FIN");
 		}
