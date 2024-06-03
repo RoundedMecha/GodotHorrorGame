@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://c7ifsi6o73brp" path="res://Scenes/Enemy.tscn" id="2_cluga"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_balg1"]
-vertices = PackedVector3Array(-11.0946, 0.477306, -13.2256, -11.0946, 0.477306, 13.2744, -2.59455, 0.477306, 13.2744, -2.59455, 0.477306, -13.2256, -0.34455, 0.477306, -13.2256, -0.34455, 0.477306, 13.2744, 11.1554, 0.477306, 13.2744, 11.1554, 0.477306, -13.2256)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(7, 6, 4), PackedInt32Array(4, 6, 5)]
+vertices = PackedVector3Array(-11.0946, 0.477306, -0.97555, -3.59455, 0.477306, -0.97555, -3.59455, 0.477306, -1.72555, -2.59455, 0.477306, -1.97555, -2.59455, 0.477306, -13.2255, -11.0946, 0.477306, -13.2255, 9.65545, 0.477306, -1.97555, 9.90545, 0.477306, -0.97555, 11.1554, 0.477306, -0.97555, -0.34455, 0.477306, -1.97555, 1.65545, 0.477306, -1.97555, 1.40545, 0.477306, -7.72555, -0.34455, 0.477306, -13.2255, 11.1554, 0.477306, -13.2255, 3.40545, 0.477306, -7.97555, 3.90545, 0.477306, -1.97555, 3.40545, 8.47731, -0.72555, 8.90545, 8.47731, -0.72555, 3.15545, 8.47731, -0.97555, 2.40545, 8.47731, -0.97555, -2.59455, 8.47731, -0.97555, 2.65545, 8.47731, -0.72555, 2.90545, 8.47731, 4.02445, 2.90545, 8.47731, -4.72555, -3.59455, 0.477306, 0.0244503, -2.59455, 0.477306, 0.27445, -11.0946, 0.477306, 13.2745, -2.59455, 0.477306, 13.2745, 9.65545, 0.477306, 0.27445, 11.1554, 0.477306, 4.27445, 4.40545, 0.477306, 4.02445, 4.15545, 0.477306, 0.27445, 1.90545, 0.477306, 4.52445, 1.90545, 0.477306, 0.27445, -0.34455, 0.477306, 0.27445, 2.40545, 0.477306, 5.77445, -0.34455, 0.477306, 13.2745, 4.15545, 0.477306, 5.77445, 11.1554, 0.477306, 13.2745)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(4, 0, 5), PackedInt32Array(8, 7, 6), PackedInt32Array(10, 9, 11), PackedInt32Array(11, 9, 12), PackedInt32Array(6, 14, 8), PackedInt32Array(8, 14, 13), PackedInt32Array(13, 14, 12), PackedInt32Array(14, 11, 12), PackedInt32Array(6, 15, 14), PackedInt32Array(18, 17, 16), PackedInt32Array(21, 20, 19), PackedInt32Array(18, 16, 21), PackedInt32Array(21, 16, 22), PackedInt32Array(21, 19, 18), PackedInt32Array(18, 19, 23), PackedInt32Array(0, 1, 24), PackedInt32Array(24, 25, 0), PackedInt32Array(0, 25, 27), PackedInt32Array(0, 27, 26), PackedInt32Array(7, 8, 28), PackedInt32Array(28, 8, 29), PackedInt32Array(31, 28, 30), PackedInt32Array(30, 28, 29), PackedInt32Array(34, 33, 32), PackedInt32Array(32, 35, 34), PackedInt32Array(34, 35, 36), PackedInt32Array(37, 30, 29), PackedInt32Array(29, 38, 37), PackedInt32Array(37, 38, 36), PackedInt32Array(36, 35, 37)]
 
 [node name="Node3D" type="Node3D"]
 
@@ -32,8 +32,18 @@ use_collision = true
 size = Vector3(1, 0.001, 1)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 28.9511, -1.51512, 2.05527, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 28.9511, -1.51512, 2.02975, 0)
 use_collision = true
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(6.12575, 0, 0, 0, 7.06562, 0, 0, 0, 1, 3.13728, 4.45552, -0.786586)
+use_collision = true
+size = Vector3(2.02429, 1, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.342482, 0, 0.998436, 0, 7.06561, 0, -6.11617, 0, -0.0559086, 2.86548, 4.45552, -1.06827)
+use_collision = true
+size = Vector3(2.02429, 1, 1)
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3023, 0, -4.71332)

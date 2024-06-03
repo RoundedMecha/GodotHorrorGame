@@ -50,19 +50,20 @@ public partial class EnemyCharBod : CharacterBody3D
 		switch(CurrentState)
 		{
 			case(States.Patrol):
+				GD.Print("Patrol");
 				if(NavAgent3D.IsNavigationFinished()){ CurrentState = States.Waiting; WaitTimer.Start(); return;}
-				MoveTowardsWaypoint(delta,Speed);
+				MoveTowardsWaypoint(Speed);
 				 break;
 			case(States.Waiting): break;
 			case(States.Hunting): 
 				GD.Print("Hunting");
 				if(NavAgent3D.IsNavigationFinished()){ CurrentState = States.Waiting; WaitTimer.Start();  return;}
-				MoveTowardsWaypoint(delta,Speed);
+				MoveTowardsWaypoint(Speed/10);
 				break;
 			case(States.Chasing):
 				GD.Print("CHASING");
 				if(NavAgent3D.IsNavigationFinished()){ CurrentState = States.Waiting; WaitTimer.Start();  return;}
-				MoveTowardsWaypoint(delta,Speed+2);
+				MoveTowardsWaypoint(Speed+2);
 				break;
 			default: break;
 		}
@@ -70,7 +71,7 @@ public partial class EnemyCharBod : CharacterBody3D
 	}
 	
 
-		public void MoveTowardsWaypoint(double delta, float speed)
+		public void MoveTowardsWaypoint(float speed)
 		{
 				var TargetPos = NavAgent3D.GetNextPathPosition();
 				var Direction = GlobalPosition.DirectionTo(TargetPos);
