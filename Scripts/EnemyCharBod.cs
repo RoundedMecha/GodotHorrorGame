@@ -33,12 +33,15 @@ public partial class EnemyCharBod : CharacterBody3D
 
 	States CurrentState;
 	
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		CurrentState = States.Patrol;
 		NavAgent3D.SetTargetPosition(Waypoints[0].GlobalPosition);
 		GD.Print(GetNode<Character>($"../Node3D").Speed); ///THIS IS IMPORTANT USE FOR STATE CHANGING AN BOOLEAN CHECKING CHARACTER SHOULD PROBABLY USE DIFFERENT SYSTEM LATER
+		var Temp = GetNode<Character>($"../Node3D");
+		GD.Print("This" + Temp.Speed);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -82,7 +85,11 @@ public partial class EnemyCharBod : CharacterBody3D
 				{
 					if(PlayerInHearRangeClose == true)
 					{
-						
+						var CharacterScriptReference = GetNode<Character>($"../Node3D");
+						if(CharacterScriptReference.Crouched == false)
+						{
+							CurrentState = States.Hunting;
+						}
 						
 					}
 					
