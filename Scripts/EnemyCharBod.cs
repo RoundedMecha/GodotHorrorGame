@@ -51,27 +51,41 @@ public partial class EnemyCharBod : CharacterBody3D
 		{
 			case(States.Patrol):
 				if(NavAgent3D.IsNavigationFinished()){ CurrentState = States.Waiting; WaitTimer.Start(); return;}
-				var TargetPos = NavAgent3D.GetNextPathPosition();
-				var Direction = GlobalPosition.DirectionTo(TargetPos);
-				FaceDirection(TargetPos);
-				Velocity = Direction * Speed;
-				MoveAndSlide();
-				
-				if(PlayerInHearRangeFar == true)
-				{
-					CheckForPlayer();
-				}
+				MoveTowardsWaypoint(delta,Speed);
 				 break;
 			case(States.Waiting): break;
-			case(States.Hunting): break;
-			case(States.Chasing): break;
+			case(States.Hunting): 
+				GD.Print("Hunting");
+				if(NavAgent3D.IsNavigationFinished()){ CurrentState = States.Waiting; WaitTimer.Start();  return;}
+				MoveTowardsWaypoint(delta,Speed);
+				break;
+			case(States.Chasing):
+				GD.Print("CHASING");
+				if(NavAgent3D.IsNavigationFinished()){ CurrentState = States.Waiting; WaitTimer.Start();  return;}
+				MoveTowardsWaypoint(delta,Speed+2);
+				break;
 			default: break;
 		}
 			
 	}
 	
+
+		public void MoveTowardsWaypoint(double delta, float speed)
+		{
+				var TargetPos = NavAgent3D.GetNextPathPosition();
+				var Direction = GlobalPosition.DirectionTo(TargetPos);
+				FaceDirection(TargetPos);
+				Velocity = Direction * Speed;
+				MoveAndSlide();
+				CheckForPlayer();
+				
+
+		}
+
 		public void CheckForPlayer() //CheckPlayer Checks Crouch or Not
 		{
+
+			//Check to See if Player Obscured
 			var SpaceState = GetWorld3D().DirectSpaceState;
 			var Querry = PhysicsRayQueryParameters3D.Create(Head.GlobalPosition,GetTree().GetNodesInGroup("Player")[0].GetNode<Camera3D>("Head/Camera3D").GlobalPosition);
 			Querry.Exclude = new Godot.Collections.Array<Rid>{GetRid()};
@@ -83,12 +97,25 @@ public partial class EnemyCharBod : CharacterBody3D
 			{
 				if (GetTree().GetNodesInGroup("Player").Contains((Node)Result["collider"]))
 				{
-					if(PlayerInHearRangeClose == true)
+					var CharacterScriptReference = GetNode<Character>($"../Node3D");
+					if(PlayerInHearRangeClose == true || PlayerInSightRangeClose == true) //Player Is too Close Begin Chasing
 					{
-						var CharacterScriptReference = GetNode<Character>($"../Node3D");
+						if(CharacterScriptReference.Crouched == false)
+						{
+							CurrentState = States.Chasing;
+							NavAgent3D.SetTargetPosition(GetTree().GetNodesInGroup("Player")[0].GetNode<Camera3D>("Head/Camera3D").GlobalPosition);
+							return; //Needed Else Hunting State Will Always Override
+						}
+						
+					}
+					else if(PlayerInHearRangeFar == true || PlayerInSightRangeFar == true) //Player Is Within Rrange Begin Hunting
+					{
+						
 						if(CharacterScriptReference.Crouched == false)
 						{
 							CurrentState = States.Hunting;
+							NavAgent3D.SetTargetPosition(GetTree().GetNodesInGroup("Player")[0].GetNode<Camera3D>("Head/Camera3D").GlobalPosition);
+						
 						}
 						
 					}
