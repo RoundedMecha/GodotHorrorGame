@@ -16,7 +16,7 @@ public partial class Character : CharacterBody3D
 	[Export]
 	public Node3D Head;
 	[Export]
-	public Camera3D Cam;
+ 	public Camera3D Cam;
 	[Export]
 	public AnimationPlayer AnimPlayer;
 	[Export]
