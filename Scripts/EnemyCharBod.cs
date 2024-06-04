@@ -50,18 +50,15 @@ public partial class EnemyCharBod : CharacterBody3D
 		switch(CurrentState)
 		{
 			case(States.Patrol):
-				GD.Print("Patrol");
 				if(NavAgent3D.IsNavigationFinished()){ CurrentState = States.Waiting; WaitTimer.Start(); return;}
 				MoveTowardsWaypoint(Speed);
 				 break;
 			case(States.Waiting): break;
 			case(States.Hunting): 
-				GD.Print("Hunting");
 				if(NavAgent3D.IsNavigationFinished()){ CurrentState = States.Waiting; WaitTimer.Start();  return;}
 				MoveTowardsWaypoint(Speed/10);
 				break;
 			case(States.Chasing):
-				GD.Print("CHASING");
 				if(NavAgent3D.IsNavigationFinished()){ CurrentState = States.Waiting; WaitTimer.Start();  return;}
 				MoveTowardsWaypoint(Speed+2);
 				break;
