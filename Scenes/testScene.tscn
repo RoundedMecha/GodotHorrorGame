@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://f8cbgwt3cbah" path="res://Scenes/item_pick_up.tscn" id="4_x03dg"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_balg1"]
-vertices = PackedVector3Array(-11.0946, 0.477306, -0.97555, -3.59455, 0.477306, -0.97555, -3.59455, 0.477306, -1.72555, -2.59455, 0.477306, -1.97555, -2.59455, 0.477306, -13.2255, -11.0946, 0.477306, -13.2255, 9.65545, 0.477306, -1.97555, 9.90545, 0.477306, -0.97555, 11.1554, 0.477306, -0.97555, -0.34455, 0.477306, -1.97555, 1.65545, 0.477306, -1.97555, 1.40545, 0.477306, -7.72555, -0.34455, 0.477306, -13.2255, 11.1554, 0.477306, -13.2255, 3.40545, 0.477306, -7.97555, 3.90545, 0.477306, -1.97555, 3.40545, 8.47731, -0.72555, 8.90545, 8.47731, -0.72555, 3.15545, 8.47731, -0.97555, 2.40545, 8.47731, -0.97555, -2.59455, 8.47731, -0.97555, 2.65545, 8.47731, -0.72555, 2.90545, 8.47731, 4.02445, 2.90545, 8.47731, -4.72555, -3.59455, 0.477306, 0.0244503, -2.59455, 0.477306, 0.27445, -11.0946, 0.477306, 13.2745, -2.59455, 0.477306, 13.2745, 9.65545, 0.477306, 0.27445, 11.1554, 0.477306, 4.27445, 4.40545, 0.477306, 4.02445, 4.15545, 0.477306, 0.27445, 1.90545, 0.477306, 4.52445, 1.90545, 0.477306, 0.27445, -0.34455, 0.477306, 0.27445, 2.40545, 0.477306, 5.77445, -0.34455, 0.477306, 13.2745, 4.15545, 0.477306, 5.77445, 11.1554, 0.477306, 13.2745)
-polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(4, 0, 5), PackedInt32Array(8, 7, 6), PackedInt32Array(10, 9, 11), PackedInt32Array(11, 9, 12), PackedInt32Array(6, 14, 8), PackedInt32Array(8, 14, 13), PackedInt32Array(13, 14, 12), PackedInt32Array(14, 11, 12), PackedInt32Array(6, 15, 14), PackedInt32Array(18, 17, 16), PackedInt32Array(21, 20, 19), PackedInt32Array(18, 16, 21), PackedInt32Array(21, 16, 22), PackedInt32Array(21, 19, 18), PackedInt32Array(18, 19, 23), PackedInt32Array(0, 1, 24), PackedInt32Array(24, 25, 0), PackedInt32Array(0, 25, 27), PackedInt32Array(0, 27, 26), PackedInt32Array(7, 8, 28), PackedInt32Array(28, 8, 29), PackedInt32Array(31, 28, 30), PackedInt32Array(30, 28, 29), PackedInt32Array(34, 33, 32), PackedInt32Array(32, 35, 34), PackedInt32Array(34, 35, 36), PackedInt32Array(37, 30, 29), PackedInt32Array(29, 38, 37), PackedInt32Array(37, 38, 36), PackedInt32Array(36, 35, 37)]
+vertices = PackedVector3Array(-3.72101, 0.477259, -1.65035, -2.72101, 0.477259, -1.90035, -2.72101, 0.477259, -14.9003, -2.72101, 0.477259, 14.8497, -2.72101, 0.477259, 0.349651, -3.72101, 0.477259, 0.0996513, -1.72101, 0.477259, 41.0997, -1.72101, 0.477259, 15.0997, -1.72101, 0.477259, -15.1503, -1.72101, 0.477259, -41.1503, -94.221, 0.477259, -41.1503, -94.221, 0.477259, 41.0997, -0.471008, 0.477259, -1.90035, 1.77899, 0.477259, -1.90035, 1.27899, 0.477259, -7.65035, -0.471008, 0.477259, -14.9003, 9.77899, 0.477259, -1.90035, 10.029, 0.477259, -0.650349, 64.279, 0.477259, -0.650349, 3.27899, 0.477259, -7.90035, 3.77899, 0.477259, -7.40035, 4.02899, 0.477259, -1.90035, 64.279, 0.477259, -41.1503, 3.27899, 8.47726, -0.650349, 9.02899, 8.47726, -0.650349, 3.27899, 8.47726, -0.900349, 2.52899, 8.47726, -0.900349, -2.72101, 8.47726, -0.900349, 2.52899, 8.47726, -0.650349, 2.77899, 8.47726, 1.84965, 3.02899, 8.47726, -2.40035, 2.02899, 0.477259, 5.59965, 1.77899, 0.477259, 0.349651, -0.471008, 0.477259, 0.349651, -0.471008, 0.477259, 14.8497, 9.77899, 0.477259, 0.349651, 4.02899, 0.477259, 0.349651, 4.02899, 0.477259, 5.84965, 64.279, 0.477259, 41.0997)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(3, 7, 6), PackedInt32Array(9, 8, 2), PackedInt32Array(2, 0, 9), PackedInt32Array(9, 0, 10), PackedInt32Array(3, 6, 5), PackedInt32Array(5, 6, 11), PackedInt32Array(0, 5, 10), PackedInt32Array(10, 5, 11), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(18, 17, 16), PackedInt32Array(19, 14, 15), PackedInt32Array(16, 21, 20), PackedInt32Array(20, 19, 15), PackedInt32Array(20, 15, 16), PackedInt32Array(16, 15, 9), PackedInt32Array(16, 9, 18), PackedInt32Array(18, 9, 22), PackedInt32Array(15, 8, 9), PackedInt32Array(25, 24, 23), PackedInt32Array(28, 27, 26), PackedInt32Array(25, 23, 30), PackedInt32Array(30, 23, 26), PackedInt32Array(26, 23, 28), PackedInt32Array(28, 23, 29), PackedInt32Array(32, 31, 33), PackedInt32Array(33, 31, 34), PackedInt32Array(37, 36, 35), PackedInt32Array(35, 17, 18), PackedInt32Array(34, 31, 37), PackedInt32Array(37, 35, 34), PackedInt32Array(34, 35, 6), PackedInt32Array(6, 35, 18), PackedInt32Array(6, 18, 38), PackedInt32Array(6, 7, 34)]
 
 [node name="Node3D" type="Node3D"]
 
@@ -56,14 +56,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.09095, -0.0226476, -11.116
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21.1089, 0)
 layers = 3
 
-[node name="CharacterPlayer" parent="." node_paths=PackedStringArray("Head", "Cam", "SubCam", "AnimPlayer", "shapeCast", "HoldItemSpace") instance=ExtResource("3_1sq1o")]
+[node name="CharacterPlayer" parent="." node_paths=PackedStringArray("Head", "Cam", "SubCam", "AnimPlayer", "shapeCast", "HoldItemSpace", "ControlCanvas") instance=ExtResource("3_1sq1o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.3928, 0.391503, -0.769523)
 Head = NodePath("Head")
 Cam = NodePath("Head/Camera3D")
-SubCam = NodePath("CanvasLayer/SubViewport/SubViewport/Camera3D")
+SubCam = NodePath("Control/CanvasLayer/SubViewport/SubViewport/Camera3D")
 AnimPlayer = NodePath("AnimationPlayer")
 shapeCast = NodePath("ShapeCast3D")
 HoldItemSpace = NodePath("Head/Camera3D/HoldItemPos")
+ControlCanvas = NodePath("Control")
 
 [node name="ItemPickUp" parent="." instance=ExtResource("4_x03dg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69793, 2.09231, -6.01924)

@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://e1uo5yc17ee6"]
+
+[ext_resource type="Script" path="res://Scripts/TitleScreen.cs" id="1_xuqmq"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xuqmq")
+
+[node name="MainLayerTitle" type="CanvasLayer" parent="."]
+
+[node name="PlayButton" type="Button" parent="MainLayerTitle"]
+offset_left = 449.0
+offset_top = 268.0
+offset_right = 493.0
+offset_bottom = 299.0
+scale = Vector2(5.53631, 4.06142)
+text = "TEST
+"
+
+[connection signal="pressed" from="MainLayerTitle/PlayButton" to="." method="ButtonPressed"]

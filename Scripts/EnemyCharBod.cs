@@ -39,9 +39,7 @@ public partial class EnemyCharBod : CharacterBody3D
 	{
 		CurrentState = States.Patrol;
 		NavAgent3D.SetTargetPosition(Waypoints[0].GlobalPosition);
-		GD.Print(GetNode<Character>($"../Node3D").Speed); ///THIS IS IMPORTANT USE FOR STATE CHANGING AN BOOLEAN CHECKING CHARACTER SHOULD PROBABLY USE DIFFERENT SYSTEM LATER
-		var Temp = GetNode<Character>($"../Node3D");
-		GD.Print("This" + Temp.Speed);
+	
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -104,6 +102,7 @@ public partial class EnemyCharBod : CharacterBody3D
 						{
 							CurrentState = States.Chasing;
 							NavAgent3D.SetTargetPosition(GetTree().GetNodesInGroup("Player")[0].GetNode<Camera3D>("Head/Camera3D").GlobalPosition);
+							
 							return; //Needed Else Hunting State Will Always Override
 						}
 						

@@ -30,6 +30,18 @@ public partial class Character : CharacterBody3D
 	public ShapeCast3D shapeCast;
 	[Export]
 	Node3D HoldItemSpace;
+	[Export]
+	Control ControlCanvas;
+
+	public void OnButtonPressed()
+	{
+		var GlobalVar = (GlobalVariables)GetNode("/root/GlobalVariables");
+		GD.PrintT(GetNode("/root/GlobalVariables"));
+		GlobalVar.PlayerHealth -=4;
+		GlobalVar.GotoScene("res://Scenes/Title Screen.tscn");
+		
+
+	}
 
 	
 	public void OnAnimationPlayerAnimationFinished(string anim_name)
@@ -37,6 +49,7 @@ public partial class Character : CharacterBody3D
 		if(anim_name == "CrouchAnim")
 		{
 			GD.Print("FIN");
+			
 		}
 		
 	}
@@ -91,10 +104,12 @@ public partial class Character : CharacterBody3D
 				else
 				{
 					var SceneLoad = GD.Load<PackedScene>("res://Scenes/item_pick_up.tscn");
-					var ObjectLoad = SceneLoad.Instantiate<Node3D>();
+					var ObjectLoad = SceneLoad.Instantiate<ItemPickUp>();
 					GetParent().AddChild(ObjectLoad);
-					ObjectLoad.GlobalPosition = HoldItemSpace.GetChild<Node3D>(0).GlobalPosition;;
+					ObjectLoad.GlobalPosition = HoldItemSpace.GetChild<Node3D>(0).GlobalPosition;
+					ObjectLoad.GlobalTransform = HoldItemSpace.GetChild<Node3D>(0).GlobalTransform;
 					HoldItemSpace.GetChild(0).QueueFree();
+				
 
 					Holding = false;
 					
@@ -110,8 +125,8 @@ public partial class Character : CharacterBody3D
 	
 	public override void _Ready()
 	{
-		shapeCast.AddException(GetNode<CollisionObject3D>("DefaultCollisionShape")); 
-		shapeCast.AddException(GetNode<CollisionObject3D>("CrouchedCollisionShape3D"));
+		shapeCast.AddException(GetNode<CollisionObject3D>("."));
+		
 	}
 	
 	public override void _Input(InputEvent @event) //_Input for when input exists only
@@ -215,8 +230,10 @@ public partial class Character : CharacterBody3D
 
     public override void _Process(double delta)
     {
-        base._Process(delta);
 		SubCam.GlobalTransform = Cam.GlobalTransform;
-
+		ControlCanvas.GetChild<CanvasLayer>(0).GetChild<RichTextLabel>(0).Text = ("Health: " + GetNode<GlobalVariables>("/root/GlobalVariables").PlayerHealth);
+        base._Process(delta);
     }
+
+	
 }
