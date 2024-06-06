@@ -1,7 +1,18 @@
-[gd_scene format=3 uid="uid://f8cbgwt3cbah"]
+[gd_scene load_steps=4 format=3 uid="uid://f8cbgwt3cbah"]
 
-[node name="ItemPickUp" type="CharacterBody3D"]
+[ext_resource type="Script" path="res://Scripts/ItemPickUp.cs" id="1_bxeop"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rki5m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uhfyv"]
+
+[node name="ItemPickUp" type="CharacterBody3D" groups=["Interactable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0241396, 0.76165, -0.158718)
+script = ExtResource("1_bxeop")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." groups=["Interactable"]]
-use_collision = true
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 2
+mesh = SubResource("BoxMesh_rki5m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_uhfyv")

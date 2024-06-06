@@ -335,11 +335,12 @@ _data = {
 "unCrouchAnim": SubResource("Animation_1xxt3")
 }
 
-[node name="Node3D" type="CharacterBody3D" node_paths=PackedStringArray("Head", "Cam", "AnimPlayer", "shapeCast", "HoldItemSpace") groups=["Player"]]
+[node name="Node3D" type="CharacterBody3D" node_paths=PackedStringArray("Head", "Cam", "SubCam", "AnimPlayer", "shapeCast", "HoldItemSpace") groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.414105, 0)
 script = ExtResource("1_e7wf0")
 Head = NodePath("Head")
 Cam = NodePath("Head/Camera3D")
+SubCam = NodePath("CanvasLayer/SubViewport/SubViewport/Camera3D")
 AnimPlayer = NodePath("AnimationPlayer")
 shapeCast = NodePath("ShapeCast3D")
 HoldItemSpace = NodePath("Head/Camera3D/HoldItemPos")
@@ -362,14 +363,17 @@ transform = Transform3D(1, 0, 0, 0, 1.01613, 0, 0, 0, 1, 0, 1.6325, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 0.984126, 0, 0, 0, 1, 0, -0.0764664, 0)
+cull_mask = 1048573
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera3D"]
+layers = 3
 light_energy = 0.0
 spot_range = 8.17879
 spot_angle = 42.2836
 
-[node name="HoldItemPos" type="Node3D" parent="Head/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.263524, -1.9263)
+[node name="HoldItemPos" type="MeshInstance3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.263524, -1.08159)
+layers = 2
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84393, 0)
@@ -380,5 +384,27 @@ debug_shape_custom_color = Color(0.628169, 0.000301972, 0.6308, 1)
 libraries = {
 "": SubResource("AnimationLibrary_7jcu1")
 }
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewport" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewport"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewport/SubViewport"]
+cull_mask = 2
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimationPlayerAnimationFinished"]

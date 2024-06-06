@@ -22,9 +22,9 @@ Head = NodePath("Head")
 navigation_mesh = SubResource("NavigationMesh_balg1")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
-transform = Transform3D(23.1891, 0, 0, 0, -0.0453876, 0, 0, 0, 27.4186, 0, -0.0226711, 0)
+transform = Transform3D(70.4768, 0, 0, 0, -0.137943, 0, 0, 0, 83.3312, -14.9529, -0.0226716, 0.0152512)
 use_collision = true
-size = Vector3(1, 0.001, 1)
+size = Vector3(2.26367, 0.001, 1)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D" groups=["Interactable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 28.9511, -1.50085, 2.14284, -0.00346375)
@@ -52,13 +52,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.58241, 0, -2.38186)
 [node name="_Door" parent="." groups=["Interactable"] instance=ExtResource("3_1r585")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.09095, -0.0226476, -11.1167)
 
-[node name="Node3D" parent="." node_paths=PackedStringArray("Head", "Cam", "AnimPlayer", "shapeCast", "HoldItemSpace") instance=ExtResource("1_u2kjj")]
+[node name="Node3D" parent="." node_paths=PackedStringArray("Head", "Cam", "SubCam", "AnimPlayer", "shapeCast", "HoldItemSpace") instance=ExtResource("1_u2kjj")]
 transform = Transform3D(1, 5.96629e-10, 0, 1.81899e-10, 1, 1.86265e-09, 0, 1.86265e-09, 1, -6.28733, 0.636389, 0.0514288)
 Head = NodePath("Head")
 Cam = NodePath("Head/Camera3D")
+SubCam = NodePath("CanvasLayer/SubViewport/SubViewport/Camera3D")
 AnimPlayer = NodePath("AnimationPlayer")
 shapeCast = NodePath("ShapeCast3D")
 HoldItemSpace = NodePath("Head/Camera3D/HoldItemPos")
 
 [node name="ItemPickUp" parent="." instance=ExtResource("4_pdakq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.822, 1.29646, 0.912034)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21.1089, 0)
+layers = 3

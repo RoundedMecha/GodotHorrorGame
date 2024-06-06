@@ -23,6 +23,8 @@ public partial class Character : CharacterBody3D
 	[Export]
  	public Camera3D Cam;
 	[Export]
+	public Camera3D SubCam;
+	[Export]
 	public AnimationPlayer AnimPlayer;
 	[Export]
 	public ShapeCast3D shapeCast;
@@ -56,16 +58,21 @@ public partial class Character : CharacterBody3D
 				
 				if(Result.Count > 0)
 				{
+
+					n = (Node3D)Result["collider"];
+						GD.Print(n.Name);
 					if(GetTree().GetNodesInGroup("Interactable").Contains((Node3D)Result["collider"]))
 					{
 						n = (Node3D)Result["collider"];
 						GD.Print(n.Name);
-						if(n.Name == "CSGBox3D")
+						if(n.Name == "ItemPickUp")
 						{
 							old_pos = n.GlobalPosition;
 							n.Free();
 							var SceneLoad = GD.Load<PackedScene>("res://Scenes/item_pick_up.tscn");
-							var ObjectLoad = SceneLoad.Instantiate<Node3D>();
+							ItemPickUp ObjectLoad = SceneLoad.Instantiate<ItemPickUp>();
+							ObjectLoad.BeingHeld = true;
+							
 							ObjectLoad.Position = HoldItemSpace.Position;
 							HoldItemSpace.AddChild(ObjectLoad);
 							GD.Print(HoldItemSpace.GetChildCount());
@@ -86,7 +93,7 @@ public partial class Character : CharacterBody3D
 					var SceneLoad = GD.Load<PackedScene>("res://Scenes/item_pick_up.tscn");
 					var ObjectLoad = SceneLoad.Instantiate<Node3D>();
 					GetParent().AddChild(ObjectLoad);
-					ObjectLoad.GlobalPosition = old_pos;
+					ObjectLoad.GlobalPosition = HoldItemSpace.GetChild<Node3D>(0).GlobalPosition;;
 					HoldItemSpace.GetChild(0).QueueFree();
 
 					Holding = false;
@@ -171,6 +178,7 @@ public partial class Character : CharacterBody3D
 	public override void _PhysicsProcess(double delta) //Called at a fixed rate
 	{
 		Vector3 velocity = Velocity;
+		
 
 		// Add the gravity.
 		if (!IsOnFloor())
@@ -204,6 +212,11 @@ public partial class Character : CharacterBody3D
 		Velocity = velocity;
 		MoveAndSlide();
 	}
-	
-	
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+		SubCam.GlobalTransform = Cam.GlobalTransform;
+
+    }
 }
