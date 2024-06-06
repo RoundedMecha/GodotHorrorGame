@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://f8cbgwt3cbah"]
+
+[node name="ItemPickUp" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0241396, 0.76165, -0.158718)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." groups=["Interactable"]]
+use_collision = true

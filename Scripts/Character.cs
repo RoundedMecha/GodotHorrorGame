@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Specialized;
 using System.Linq;
 
 public partial class Character : CharacterBody3D
@@ -14,7 +15,7 @@ public partial class Character : CharacterBody3D
 	public bool Holding = false;
 
 	Node3D n;
-	
+	Vector3 old_pos;
 	
 	[ExportGroup("Properties")]
 	[Export]
@@ -25,6 +26,9 @@ public partial class Character : CharacterBody3D
 	public AnimationPlayer AnimPlayer;
 	[Export]
 	public ShapeCast3D shapeCast;
+	[Export]
+	Node3D HoldItemSpace;
+
 	
 	public void OnAnimationPlayerAnimationFinished(string anim_name)
 	{
@@ -36,6 +40,7 @@ public partial class Character : CharacterBody3D
 	}
 	public void CheckForInteractable()
 	{
+		
 		if(!Holding)
 			{
 				GD.Print("WORKS");
@@ -48,25 +53,28 @@ public partial class Character : CharacterBody3D
 				Querry.CollideWithAreas = true;
 				var Result = new Godot.Collections.Dictionary{};
 				Result = SpaceState.IntersectRay(Querry);
-				Vector3 old_pos;
-
+				
 				if(Result.Count > 0)
 				{
-					n = (Node3D)Result["collider"];
-					n = n.GetParent<Node3D>();
-					old_pos = n.GlobalPosition;
-					GD.Print(n.Name.ToString());
-
-					if(GetTree().GetNodesInGroup("Interactable").Contains((Node)Result["collider"]))
+					if(GetTree().GetNodesInGroup("Interactable").Contains((Node3D)Result["collider"]))
 					{
-								
-					GD.Print("THIS NAME"+n.Name);
-					GD.Print("UPDATE CHILD NUM " + GetChildCount());
-					GD.Print("UPDATE CHILD NUM " + GetChildCount());
-					n.GlobalPosition =  CamOrigin + Cam.ProjectRayNormal(ScreenSize) * 5f; 
-					Holding = true;
-					GD.Print("POS AFTER ADDED" + n.GlobalPosition);
+						n = (Node3D)Result["collider"];
+						GD.Print(n.Name);
+						if(n.Name == "CSGBox3D")
+						{
+							old_pos = n.GlobalPosition;
+							n.Free();
+							var SceneLoad = GD.Load<PackedScene>("res://Scenes/item_pick_up.tscn");
+							var ObjectLoad = SceneLoad.Instantiate<Node3D>();
+							ObjectLoad.Position = HoldItemSpace.Position;
+							HoldItemSpace.AddChild(ObjectLoad);
+							GD.Print(HoldItemSpace.GetChildCount());
+							GD.Print(HoldItemSpace.GetChild<Node3D>(0).Name);
+							GD.Print(HoldItemSpace.GetChild<Node3D>(0).GlobalPosition);
 
+							Holding = true;
+						
+						}
 					}
 				
 
@@ -75,14 +83,14 @@ public partial class Character : CharacterBody3D
 				}
 				else
 				{
-					GD.Print("Detach Item"+ n.Name.ToString());
-					GD.Print("Spot Node Count B4" + GetChildCount());
-					GD.Print("Spot Node Count B4" + GetChildCount());
-					GD.Print("Root Node Count B4" + GetNode(".").GetChildCount());
-					n.GlobalPosition = new Vector3(0.5f,0.5f,0.5f);
-					GD.Print("Root Node Count Aft" + GetNode(".").GetChildCount());
+					var SceneLoad = GD.Load<PackedScene>("res://Scenes/item_pick_up.tscn");
+					var ObjectLoad = SceneLoad.Instantiate<Node3D>();
+					GetParent().AddChild(ObjectLoad);
+					ObjectLoad.GlobalPosition = old_pos;
+					HoldItemSpace.GetChild(0).QueueFree();
+
 					Holding = false;
-					GD.Print("POS AFTER REMOV" + n.GlobalPosition);
+					
 				}
 				
 				
@@ -190,6 +198,8 @@ public partial class Character : CharacterBody3D
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
 			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
 		}
+
+		if(Holding == true){ GD.Print(HoldItemSpace.GetChild<Node3D>(0).GlobalPosition);}
 
 		Velocity = velocity;
 		MoveAndSlide();
