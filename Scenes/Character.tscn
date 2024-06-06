@@ -335,7 +335,7 @@ _data = {
 "unCrouchAnim": SubResource("Animation_1xxt3")
 }
 
-[node name="Node3D" type="CharacterBody3D" node_paths=PackedStringArray("Head", "Cam", "SubCam", "AnimPlayer", "shapeCast", "HoldItemSpace") groups=["Player"]]
+[node name="CharacterPlayer" type="CharacterBody3D" node_paths=PackedStringArray("Head", "Cam", "SubCam", "AnimPlayer", "shapeCast", "HoldItemSpace") groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.414105, 0)
 script = ExtResource("1_e7wf0")
 Head = NodePath("Head")
@@ -373,7 +373,7 @@ spot_angle = 42.2836
 
 [node name="HoldItemPos" type="MeshInstance3D" parent="Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.263524, -1.08159)
-layers = 2
+layers = 0
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84393, 0)

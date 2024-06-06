@@ -95,9 +95,11 @@ public partial class EnemyCharBod : CharacterBody3D
 			{
 				if (GetTree().GetNodesInGroup("Player").Contains((Node)Result["collider"]))
 				{
-					var CharacterScriptReference = GetNode<Character>($"../Node3D");
+					var t = GetTree().GetNodesInGroup("Player")[0];
+					var CharacterScriptReference = (Character)t;
 					if(PlayerInHearRangeClose == true || PlayerInSightRangeClose == true) //Player Is too Close Begin Chasing
 					{
+						GD.Print("Chasing");
 						if(CharacterScriptReference.Crouched == false)
 						{
 							CurrentState = States.Chasing;
@@ -108,7 +110,7 @@ public partial class EnemyCharBod : CharacterBody3D
 					}
 					else if(PlayerInHearRangeFar == true || PlayerInSightRangeFar == true) //Player Is Within Rrange Begin Hunting
 					{
-						
+						GD.Print("Hunting");
 						if(CharacterScriptReference.Crouched == false)
 						{
 							CurrentState = States.Hunting;
