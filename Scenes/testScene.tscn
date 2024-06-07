@@ -66,5 +66,6 @@ shapeCast = NodePath("ShapeCast3D")
 HoldItemSpace = NodePath("Head/Camera3D/HoldItemPos")
 ControlCanvas = NodePath("Control")
 
-[node name="ItemPickUp" parent="." instance=ExtResource("4_x03dg")]
+[node name="ItemPickUp" parent="." node_paths=PackedStringArray("ObjectMesh") instance=ExtResource("4_x03dg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69793, 2.09231, -6.01924)
+ObjectMesh = NodePath("MeshInstance3D")

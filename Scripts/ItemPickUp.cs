@@ -7,12 +7,22 @@ public partial class ItemPickUp : CharacterBody3D
 	public const float JumpVelocity = 4.5f;
 	public bool BeingHeld;
 
-	public override void _PhysicsProcess(double delta)
+	[ExportGroup("Properties")]
+	[Export]
+	MeshInstance3D ObjectMesh;
+
+    public override void _Ready()
+    {
+		ObjectMesh.Layers = 1;
+        base._Ready();
+    }
+
+    public override void _PhysicsProcess(double delta)
 	{
 		Vector3 velocity = Velocity;
 		if (BeingHeld)
 		{
-			
+			ObjectMesh.Layers = 2;
 			
 			
 		}

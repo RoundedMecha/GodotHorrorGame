@@ -106,9 +106,20 @@ public partial class Character : CharacterBody3D
 					var SceneLoad = GD.Load<PackedScene>("res://Scenes/item_pick_up.tscn");
 					var ObjectLoad = SceneLoad.Instantiate<ItemPickUp>();
 					GetParent().AddChild(ObjectLoad);
-					ObjectLoad.GlobalPosition = HoldItemSpace.GetChild<Node3D>(0).GlobalPosition;
-					ObjectLoad.GlobalTransform = HoldItemSpace.GetChild<Node3D>(0).GlobalTransform;
+					if(HoldItemSpace.GetChild<Node3D>(0).GlobalPosition.Z > 0) //Rethink This
+					{
+						ObjectLoad.GlobalPosition = new Vector3(HoldItemSpace.GetChild<Node3D>(0).GlobalPosition.X,Mathf.Abs(Head.GlobalPosition.Y), HoldItemSpace.GetChild<Node3D>(0).GlobalPosition.Z + 1);
+
+					}
+					else
+					{
+						ObjectLoad.GlobalPosition = new Vector3(HoldItemSpace.GetChild<Node3D>(0).GlobalPosition.X,Mathf.Abs(Head.GlobalPosition.Y), HoldItemSpace.GetChild<Node3D>(0).GlobalPosition.Z + -1);
+					}
+					
+					GD.Print("UPDATED POS" + ObjectLoad.GlobalPosition);
+					//ObjectLoad.GlobalTransform = HoldItemSpace.GetChild<Node3D>(0).GlobalTransform;
 					HoldItemSpace.GetChild(0).QueueFree();
+					GD.Print("LOADED OBJ POS: " + ObjectLoad.GlobalPosition);
 				
 
 					Holding = false;
