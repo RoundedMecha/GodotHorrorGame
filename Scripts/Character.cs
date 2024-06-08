@@ -71,9 +71,6 @@ public partial class Character : CharacterBody3D
 				
 				if(Result.Count > 0)
 				{
-
-					n = (Node3D)Result["collider"];
-						GD.Print(n.Name);
 					if(GetTree().GetNodesInGroup("Interactable").Contains((Node3D)Result["collider"]))
 					{
 						n = (Node3D)Result["collider"];
@@ -85,6 +82,7 @@ public partial class Character : CharacterBody3D
 							var SceneLoad = GD.Load<PackedScene>("res://Scenes/item_pick_up.tscn");
 							ItemPickUp ObjectLoad = SceneLoad.Instantiate<ItemPickUp>();
 							ObjectLoad.BeingHeld = true;
+							ObjectLoad.ShapeCast3DCheckForWorld.AddException(GetNode<CollisionObject3D>("."));
 							
 							ObjectLoad.Position = HoldItemSpace.Position;
 							HoldItemSpace.AddChild(ObjectLoad);
@@ -100,43 +98,52 @@ public partial class Character : CharacterBody3D
 
 				}
 						
-				}
-				else
-				{
-					var SceneLoad = GD.Load<PackedScene>("res://Scenes/item_pick_up.tscn");
-					var ObjectLoad = SceneLoad.Instantiate<ItemPickUp>();
-					GetParent().AddChild(ObjectLoad);
-					if(HoldItemSpace.GetChild<Node3D>(0).GlobalPosition.Z > 0) //Rethink This
+			}
+		else
+			{
+				var SceneLoad = GD.Load<PackedScene>("res://Scenes/item_pick_up.tscn");
+				var ObjectLoad = SceneLoad.Instantiate<ItemPickUp>();
+				GetParent().AddChild(ObjectLoad);
+				ObjectLoad.ShapeCast3DCheckForWorld.AddException(GetNode<CollisionObject3D>("."));
+				GD.Print("Name of COllision Body Exluded is : " + (GetNode<CollisionObject3D>(".")));
+				GD.Print("Before Move:" + ObjectLoad.ShapeCast3DCheckForWorld.IsColliding());
+				//ObjectLoad.GlobalPosition = new Vector3(HoldItemSpace.GetChild<Node3D>(0).GlobalPosition.X,Mathf.Abs(Head.GlobalPosition.Y), HoldItemSpace.GetChild<Node3D>(0).GlobalPosition.Z);
+				ObjectLoad.GlobalPosition = new Vector3(this.GlobalPosition.X,Mathf.Abs(Head.GlobalPosition.Y), this.GetChild<Node3D>(0).GlobalPosition.Z);
+				ObjectLoad.ShapeCast3DCheckForWorld.ForceShapecastUpdate();
+					if(ObjectLoad.ShapeCast3DCheckForWorld.IsColliding() && !GetTree().GetNodesInGroup("Interactable").Contains((Node3D)ObjectLoad.ShapeCast3DCheckForWorld.GetCollider(0)))
 					{
-						ObjectLoad.GlobalPosition = new Vector3(HoldItemSpace.GetChild<Node3D>(0).GlobalPosition.X,Mathf.Abs(Head.GlobalPosition.Y), HoldItemSpace.GetChild<Node3D>(0).GlobalPosition.Z + 1);
+						var t = GetTree().GetNodesInGroup("Interactable").Contains((Node3D)ObjectLoad.ShapeCast3DCheckForWorld.GetCollider(0));
 
+						GD.Print("Count of Col" + ObjectLoad.ShapeCast3DCheckForWorld.GetCollisionCount());
+						GD.Print("collider is in group Interactable: " + t  );
+						GD.Print("After Move: " + ObjectLoad.ShapeCast3DCheckForWorld.IsColliding());
+						GD.Print("Colliding With: " + ObjectLoad.ShapeCast3DCheckForWorld.GetCollider(0));
+						
+						ObjectLoad.Free();
 					}
 					else
 					{
-						ObjectLoad.GlobalPosition = new Vector3(HoldItemSpace.GetChild<Node3D>(0).GlobalPosition.X,Mathf.Abs(Head.GlobalPosition.Y), HoldItemSpace.GetChild<Node3D>(0).GlobalPosition.Z + -1);
+						
+						GD.Print("UPDATED POS" + ObjectLoad.GlobalPosition);
+						//ObjectLoad.GlobalTransform = HoldItemSpace.GetChild<Node3D>(0).GlobalTransform;
+						HoldItemSpace.GetChild(0).QueueFree();
+						GD.Print("LOADED OBJ POS: " + ObjectLoad.GlobalPosition);				
+						Holding = false;
 					}
-					
-					GD.Print("UPDATED POS" + ObjectLoad.GlobalPosition);
-					//ObjectLoad.GlobalTransform = HoldItemSpace.GetChild<Node3D>(0).GlobalTransform;
-					HoldItemSpace.GetChild(0).QueueFree();
-					GD.Print("LOADED OBJ POS: " + ObjectLoad.GlobalPosition);
 				
-
-					Holding = false;
 					
 				}
-				
-				
+					
 			
-
-			
-		
-		
+					
 	}
+				
+		
 	
 	public override void _Ready()
 	{
 		shapeCast.AddException(GetNode<CollisionObject3D>("."));
+	
 		
 	}
 	
@@ -233,7 +240,7 @@ public partial class Character : CharacterBody3D
 			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
 		}
 
-		if(Holding == true){ GD.Print(HoldItemSpace.GetChild<Node3D>(0).GlobalPosition);}
+	
 
 		Velocity = velocity;
 		MoveAndSlide();

@@ -10,9 +10,12 @@ public partial class ItemPickUp : CharacterBody3D
 	[ExportGroup("Properties")]
 	[Export]
 	MeshInstance3D ObjectMesh;
+	[Export]
+	public ShapeCast3D ShapeCast3DCheckForWorld;
 
     public override void _Ready()
     {
+		ShapeCast3DCheckForWorld.AddException(GetNode<CollisionObject3D>("."));
 		ObjectMesh.Layers = 1;
         base._Ready();
     }
@@ -25,6 +28,7 @@ public partial class ItemPickUp : CharacterBody3D
 			ObjectMesh.Layers = 2;
 			
 			
+			
 		}
 		else
 		{
@@ -32,6 +36,9 @@ public partial class ItemPickUp : CharacterBody3D
 			{
 			velocity += GetGravity() * (float)delta;
 			}
+
+			
+			
 
 	
 

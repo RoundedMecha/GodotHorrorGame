@@ -21,23 +21,31 @@ Head = NodePath("Head")
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_balg1")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
+[node name="Floor" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(70.4768, 0, 0, 0, -0.137943, 0, 0, 0, 83.3312, -14.9529, -0.0226716, 0.0152512)
 use_collision = true
+collision_layer = 5
+collision_mask = 5
 size = Vector3(2.26367, 0.001, 1)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D" groups=["Interactable"]]
+[node name="CrouchBar" type="CSGBox3D" parent="NavigationRegion3D" groups=["Interactable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 28.9511, -1.50085, 1.98772, -0.00346375)
 use_collision = true
+collision_layer = 5
+collision_mask = 5
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D"]
+[node name="Wall2" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(6.12575, 0, 0, 0, 7.06562, 0, 0, 0, 1, 3.13728, 4.45552, -0.786586)
 use_collision = true
+collision_layer = 5
+collision_mask = 5
 size = Vector3(2.02429, 1, 1)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D"]
+[node name="Wall1" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(-0.342482, 0, 0.998436, 0, 7.06561, 0, -6.11617, 0, -0.0559086, 2.86548, 4.45552, -1.06827)
 use_collision = true
+collision_layer = 5
+collision_mask = 5
 size = Vector3(2.02429, 1, 1)
 
 [node name="Marker3D" type="Marker3D" parent="."]
@@ -66,6 +74,7 @@ shapeCast = NodePath("ShapeCast3D")
 HoldItemSpace = NodePath("Head/Camera3D/HoldItemPos")
 ControlCanvas = NodePath("Control")
 
-[node name="ItemPickUp" parent="." node_paths=PackedStringArray("ObjectMesh") instance=ExtResource("4_x03dg")]
+[node name="ItemPickUp" parent="." node_paths=PackedStringArray("ObjectMesh", "ShapeCast3DCheckForWorld") instance=ExtResource("4_x03dg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69793, 2.09231, -6.01924)
 ObjectMesh = NodePath("MeshInstance3D")
+ShapeCast3DCheckForWorld = NodePath("ItemPickUpShapeCast")
