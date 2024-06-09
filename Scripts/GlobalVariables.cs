@@ -7,6 +7,7 @@ public partial class GlobalVariables : Node
 	public static GlobalVariables _Instance;
 	public int PlayerHealth {get;set;} = 100;
 	public Node CurrentScene {get;set;}
+    public Viewport CurViewPort{get;set;}
 
 
     public override void _EnterTree()
@@ -25,6 +26,9 @@ public partial class GlobalVariables : Node
 	{
 		var Root = GetNode("/root");
 		CurrentScene = Root.GetChild(Root.GetChildCount() - 1);
+        CurViewPort = Root.GetViewport();
+        GD.Print("Current ViewPort Size: " + CurViewPort.GetWindow().Size);
+       
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
