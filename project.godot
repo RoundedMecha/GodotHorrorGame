@@ -81,3 +81,7 @@ TestDirection={
 
 2d_render/layer_1="GeneralLayer"
 2d_render/layer_2="ItemPickUpLayer"
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
