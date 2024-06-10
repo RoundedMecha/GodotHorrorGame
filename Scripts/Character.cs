@@ -29,7 +29,7 @@ public partial class Character : CharacterBody3D
 	[Export]
 	public ShapeCast3D shapeCast;
 	[Export]
-	Node3D HoldItemSpace;
+	public Node3D HoldItemSpace;
 	[Export]
 	Control ControlCanvas;
 
