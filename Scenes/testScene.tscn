@@ -80,5 +80,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69793, 2.09231, -6.01924)
 ObjectMesh = NodePath("MeshInstance3D")
 ShapeCast3DCheckForWorld = NodePath("ItemPickUpShapeCast")
 
-[node name="ObjectiveToBringItemTo" parent="." instance=ExtResource("5_3rang")]
+[node name="ObjectiveToBringItemTo" parent="." node_paths=PackedStringArray("AnimationPlayer") instance=ExtResource("5_3rang")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3578, 1.58566, -10.3271)
+AnimationPlayer = NodePath("StaticBody3D/AnimationPlayer")
+ObjectiveItem = "ItemPickUp"
+
+[node name="ObjectiveToBringItemTo2" parent="." node_paths=PackedStringArray("AnimationPlayer") instance=ExtResource("5_3rang")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4835, 0.769493, 0.352709)
+AnimationPlayer = NodePath("StaticBody3D/AnimationPlayer")

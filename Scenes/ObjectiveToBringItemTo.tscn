@@ -218,12 +218,13 @@ _data = {
 "RESET": SubResource("Animation_els4t")
 }
 
-[node name="ObjectiveToBringItemTo" type="Node3D"]
+[node name="ObjectiveToBringItemTo" type="Node3D" node_paths=PackedStringArray("AnimationPlayer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.792094, 0)
+script = ExtResource("1_73jqn")
+AnimationPlayer = NodePath("StaticBody3D/AnimationPlayer")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(0.0158295, 0, 0.999875, 0, 1, 0, -0.999875, 0, 0.0158295, 0, 0, 0)
-script = ExtResource("1_73jqn")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_b3a2j")
@@ -243,4 +244,4 @@ libraries = {
 "": SubResource("AnimationLibrary_n2hhs")
 }
 
-[connection signal="body_entered" from="StaticBody3D/Area3D" to="StaticBody3D" method="OnBodyEntered"]
+[connection signal="body_entered" from="StaticBody3D/Area3D" to="." method="OnBodyEntered"]

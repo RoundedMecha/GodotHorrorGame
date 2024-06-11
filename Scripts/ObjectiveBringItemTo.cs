@@ -2,19 +2,21 @@ using Godot;
 using System;
 using System.Collections;
 
-public partial class ObjectiveBringItemTo : StaticBody3D
+public partial class ObjectiveBringItemTo : Node3D
 {
 
 	Character PlayerCharacter;
+	[ExportGroup("Properties")]
+	[Export]
 	AnimationPlayer AnimationPlayer;
+	[Export]
+	string ObjectiveItem;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		var playerChar = GetTree().GetNodesInGroup("Player")[0];
 		PlayerCharacter = (Character)playerChar;
-
-		AnimationPlayer = GetChild<AnimationPlayer>(3);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,7 +28,7 @@ public partial class ObjectiveBringItemTo : StaticBody3D
 	{
 		if(Body.Name == PlayerCharacter.Name)
 		{
-			if(PlayerCharacter.Holding == true && PlayerCharacter.HoldItemSpace.GetChild(0).Name == "ItemPickUp")
+			if(PlayerCharacter.Holding == true && PlayerCharacter.HoldItemSpace.GetChild(0).Name == ObjectiveItem)
 			{
 				AnimationPlayer.Play("MorphTest");
 			}
