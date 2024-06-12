@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://f8cbgwt3cbah"]
+
+[ext_resource type="Script" path="res://Scripts/ItemPickUp.cs" id="1_bxeop"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rki5m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_oy7jo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uhfyv"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6fxer"]
+margin = 0.0
+radius = 1.1
+
+[node name="ItemPickUp" type="CharacterBody3D" node_paths=PackedStringArray("ObjectMesh", "ShapeCast3DCheckForWorld") groups=["Interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.803, 0)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_bxeop")
+ObjectMesh = NodePath("MeshInstance3D")
+ShapeCast3DCheckForWorld = NodePath("ItemPickUpShapeCast")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 2
+mesh = SubResource("BoxMesh_rki5m")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.383662, 0, 0, 0, 0.395095, 0, 0, 0, 0.427856, 0.600684, 0, 0)
+mesh = SubResource("BoxMesh_oy7jo")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_uhfyv")
+
+[node name="ItemPickUpShapeCast" type="ShapeCast3D" parent="."]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 1.09715, 0)
+shape = SubResource("SphereShape3D_6fxer")
+collision_mask = 4

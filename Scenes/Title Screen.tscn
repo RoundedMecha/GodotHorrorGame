@@ -1,0 +1,78 @@
+[gd_scene load_steps=2 format=3 uid="uid://e1uo5yc17ee6"]
+
+[ext_resource type="Script" path="res://Scripts/TitleScreen.cs" id="1_xuqmq"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_xuqmq")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="MainLayerTitle" type="CanvasLayer" parent="."]
+
+[node name="SettingGoButton" type="Button" parent="MainLayerTitle"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.0
+offset_top = -43.0
+offset_right = 107.0
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Go Setting
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayButton" type="Button" parent="MainLayerTitle"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.0
+offset_right = 22.0
+offset_bottom = 31.0
+grow_horizontal = 2
+scale = Vector2(5.53631, 4.06142)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "TEST
+"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="MainLayerTitle"]
+visible = false
+
+[node name="SettingButton" type="Button" parent="MainLayerTitle/CanvasLayer"]
+offset_left = 435.0
+offset_top = 457.0
+offset_right = 714.0
+offset_bottom = 560.0
+text = "Setting
+"
+
+[connection signal="pressed" from="MainLayerTitle/SettingGoButton" to="." method="TransferToSettingsButton"]
+[connection signal="pressed" from="MainLayerTitle/PlayButton" to="." method="ButtonPressed"]
+[connection signal="pressed" from="MainLayerTitle/CanvasLayer/SettingButton" to="." method="SettingButtonPress"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dx6e2aakd1c1e"]
+[gd_scene load_steps=12 format=3 uid="uid://dx6e2aakd1c1e"]
 
 [ext_resource type="Script" path="res://Scripts/Character.cs" id="1_e7wf0"]
+[ext_resource type="AudioStream" uid="uid://lietceit4wh8" path="res://SoundFiles/740902__anio-official__gargargar.mp3" id="2_uhdlp"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_e5j7r"]
 
@@ -335,13 +336,17 @@ _data = {
 "unCrouchAnim": SubResource("Animation_1xxt3")
 }
 
-[node name="Node3D" type="CharacterBody3D" node_paths=PackedStringArray("Head", "Cam", "AnimPlayer", "shapeCast") groups=["Player"]]
+[node name="CharacterPlayer" type="CharacterBody3D" node_paths=PackedStringArray("Head", "Cam", "SubCam", "AnimPlayer", "shapeCast", "HoldItemSpace", "ControlCanvas", "AudioStreamPlayer") groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.414105, 0)
 script = ExtResource("1_e7wf0")
 Head = NodePath("Head")
 Cam = NodePath("Head/Camera3D")
+SubCam = NodePath("Control/CanvasLayer/SubViewport/SubViewport/Camera3D")
 AnimPlayer = NodePath("AnimationPlayer")
 shapeCast = NodePath("ShapeCast3D")
+HoldItemSpace = NodePath("Head/Camera3D/HoldItemPos")
+ControlCanvas = NodePath("Control")
+AudioStreamPlayer = NodePath("AudioStreamPlayer3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.900667, 0)
@@ -361,11 +366,17 @@ transform = Transform3D(1, 0, 0, 0, 1.01613, 0, 0, 0, 1, 0, 1.6325, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 0.984126, 0, 0, 0, 1, 0, -0.0764664, 0)
+cull_mask = 1048569
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera3D"]
+layers = 3
 light_energy = 0.0
 spot_range = 8.17879
 spot_angle = 42.2836
+
+[node name="HoldItemPos" type="MeshInstance3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.263524, -1.08159)
+layers = 0
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84393, 0)
@@ -377,4 +388,58 @@ libraries = {
 "": SubResource("AnimationLibrary_7jcu1")
 }
 
+[node name="Control" type="Control" parent="."]
+visibility_layer = 4
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Control"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/CanvasLayer"]
+modulate = Color(0, 0, 0, 1)
+z_index = 1
+offset_right = 60.0
+offset_bottom = 40.0
+scale = Vector2(2.29643, 1.48728)
+text = "Health: "
+fit_content = true
+autowrap_mode = 0
+
+[node name="SubViewport" type="SubViewportContainer" parent="Control/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="Control/CanvasLayer/SubViewport"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Control/CanvasLayer/SubViewport/SubViewport"]
+cull_mask = 2
+
+[node name="Button" type="Button" parent="Control/CanvasLayer"]
+offset_left = 534.0
+offset_top = 278.0
+offset_right = 578.0
+offset_bottom = 309.0
+text = "TEST"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_uhdlp")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimationPlayerAnimationFinished"]
+[connection signal="pressed" from="Control/CanvasLayer/Button" to="." method="OnButtonPressed"]

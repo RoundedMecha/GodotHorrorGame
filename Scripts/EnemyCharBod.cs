@@ -39,9 +39,7 @@ public partial class EnemyCharBod : CharacterBody3D
 	{
 		CurrentState = States.Patrol;
 		NavAgent3D.SetTargetPosition(Waypoints[0].GlobalPosition);
-		GD.Print(GetNode<Character>($"../Node3D").Speed); ///THIS IS IMPORTANT USE FOR STATE CHANGING AN BOOLEAN CHECKING CHARACTER SHOULD PROBABLY USE DIFFERENT SYSTEM LATER
-		var Temp = GetNode<Character>($"../Node3D");
-		GD.Print("This" + Temp.Speed);
+	
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -50,18 +48,15 @@ public partial class EnemyCharBod : CharacterBody3D
 		switch(CurrentState)
 		{
 			case(States.Patrol):
-				GD.Print("Patrol");
 				if(NavAgent3D.IsNavigationFinished()){ CurrentState = States.Waiting; WaitTimer.Start(); return;}
 				MoveTowardsWaypoint(Speed);
 				 break;
 			case(States.Waiting): break;
 			case(States.Hunting): 
-				GD.Print("Hunting");
 				if(NavAgent3D.IsNavigationFinished()){ CurrentState = States.Waiting; WaitTimer.Start();  return;}
 				MoveTowardsWaypoint(Speed/10);
 				break;
 			case(States.Chasing):
-				GD.Print("CHASING");
 				if(NavAgent3D.IsNavigationFinished()){ CurrentState = States.Waiting; WaitTimer.Start();  return;}
 				MoveTowardsWaypoint(Speed+2);
 				break;
@@ -98,13 +93,16 @@ public partial class EnemyCharBod : CharacterBody3D
 			{
 				if (GetTree().GetNodesInGroup("Player").Contains((Node)Result["collider"]))
 				{
-					var CharacterScriptReference = GetNode<Character>($"../Node3D");
+					var t = GetTree().GetNodesInGroup("Player")[0];
+					var CharacterScriptReference = (Character)t;
 					if(PlayerInHearRangeClose == true || PlayerInSightRangeClose == true) //Player Is too Close Begin Chasing
 					{
+						GD.Print("Chasing");
 						if(CharacterScriptReference.Crouched == false)
 						{
 							CurrentState = States.Chasing;
 							NavAgent3D.SetTargetPosition(GetTree().GetNodesInGroup("Player")[0].GetNode<Camera3D>("Head/Camera3D").GlobalPosition);
+							
 							return; //Needed Else Hunting State Will Always Override
 						}
 						
@@ -122,7 +120,20 @@ public partial class EnemyCharBod : CharacterBody3D
 					}
 					
 				}
+				else if(PlayerInHearRangeFar == true || PlayerInSightRangeFar == true) // Player is obscured but can be heard Needs Better Implementation should only go to characters current position
+				{
+					var t = GetTree().GetNodesInGroup("Player")[0];
+					var CharacterScriptReference = (Character)t;
+					if(CharacterScriptReference.AudioStreamPlayer.Playing == true && CharacterScriptReference.AudioStreamPlayer.VolumeDb > 0)
+					{ 
+						CurrentState = States.Hunting;
+						NavAgent3D.SetTargetPosition(GetTree().GetNodesInGroup("Player")[0].GetNode<Camera3D>("Head/Camera3D").GlobalPosition);
+						Console.WriteLine("CAN HEAR PLAYER");
+					}
+						
+				}
 			}
+			
 			
 		}
 	
