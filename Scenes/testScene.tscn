@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://8j5asje7507f"]
+[gd_scene load_steps=7 format=3 uid="uid://8j5asje7507f"]
 
 [ext_resource type="PackedScene" uid="uid://c7ifsi6o73brp" path="res://Scenes/Enemy.tscn" id="2_cluga"]
 [ext_resource type="PackedScene" uid="uid://bp2u1yeg70oht" path="res://Scenes/Door.tscn" id="3_1r585"]
 [ext_resource type="PackedScene" uid="uid://dx6e2aakd1c1e" path="res://Scenes/Character.tscn" id="3_1sq1o"]
 [ext_resource type="PackedScene" uid="uid://f8cbgwt3cbah" path="res://Scenes/item_pick_up.tscn" id="4_x03dg"]
+[ext_resource type="PackedScene" uid="uid://b3wmniwjmruh" path="res://Scenes/ObjectiveToBringItemTo.tscn" id="5_3rang"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_balg1"]
 vertices = PackedVector3Array(-3.72101, 0.477259, -1.65035, -2.72101, 0.477259, -1.90035, -2.72101, 0.477259, -14.9003, -2.72101, 0.477259, 14.8497, -2.72101, 0.477259, 0.349651, -3.72101, 0.477259, 0.0996513, -1.72101, 0.477259, 41.0997, -1.72101, 0.477259, 15.0997, -1.72101, 0.477259, -15.1503, -1.72101, 0.477259, -41.1503, -94.221, 0.477259, -41.1503, -94.221, 0.477259, 41.0997, -0.471008, 0.477259, -1.90035, 1.77899, 0.477259, -1.90035, 1.27899, 0.477259, -7.65035, -0.471008, 0.477259, -14.9003, 9.77899, 0.477259, -1.90035, 10.029, 0.477259, -0.650349, 64.279, 0.477259, -0.650349, 3.27899, 0.477259, -7.90035, 3.77899, 0.477259, -7.40035, 4.02899, 0.477259, -1.90035, 64.279, 0.477259, -41.1503, 3.27899, 8.47726, -0.650349, 9.02899, 8.47726, -0.650349, 3.27899, 8.47726, -0.900349, 2.52899, 8.47726, -0.900349, -2.72101, 8.47726, -0.900349, 2.52899, 8.47726, -0.650349, 2.77899, 8.47726, 1.84965, 3.02899, 8.47726, -2.40035, 2.02899, 0.477259, 5.59965, 1.77899, 0.477259, 0.349651, -0.471008, 0.477259, 0.349651, -0.471008, 0.477259, 14.8497, 9.77899, 0.477259, 0.349651, 4.02899, 0.477259, 0.349651, 4.02899, 0.477259, 5.84965, 64.279, 0.477259, 41.0997)
@@ -64,7 +65,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.09095, -0.0226476, -11.116
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21.1089, 0)
 layers = 3
 
-[node name="CharacterPlayer" parent="." node_paths=PackedStringArray("Head", "Cam", "SubCam", "AnimPlayer", "shapeCast", "HoldItemSpace", "ControlCanvas") instance=ExtResource("3_1sq1o")]
+[node name="CharacterPlayer" parent="." node_paths=PackedStringArray("Head", "Cam", "SubCam", "AnimPlayer", "shapeCast", "HoldItemSpace", "ControlCanvas", "AudioStreamPlayer") instance=ExtResource("3_1sq1o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.3928, 0.391503, -0.769523)
 Head = NodePath("Head")
 Cam = NodePath("Head/Camera3D")
@@ -73,8 +74,18 @@ AnimPlayer = NodePath("AnimationPlayer")
 shapeCast = NodePath("ShapeCast3D")
 HoldItemSpace = NodePath("Head/Camera3D/HoldItemPos")
 ControlCanvas = NodePath("Control")
+AudioStreamPlayer = NodePath("AudioStreamPlayer3D")
 
 [node name="ItemPickUp" parent="." node_paths=PackedStringArray("ObjectMesh", "ShapeCast3DCheckForWorld") instance=ExtResource("4_x03dg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69793, 2.09231, -6.01924)
 ObjectMesh = NodePath("MeshInstance3D")
 ShapeCast3DCheckForWorld = NodePath("ItemPickUpShapeCast")
+
+[node name="ObjectiveToBringItemTo" parent="." node_paths=PackedStringArray("AnimationPlayer") instance=ExtResource("5_3rang")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3578, 1.58566, -10.3271)
+AnimationPlayer = NodePath("StaticBody3D/AnimationPlayer")
+ObjectiveItem = "ItemPickUp"
+
+[node name="ObjectiveToBringItemTo2" parent="." node_paths=PackedStringArray("AnimationPlayer") instance=ExtResource("5_3rang")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4835, 0.769493, 0.352709)
+AnimationPlayer = NodePath("StaticBody3D/AnimationPlayer")
