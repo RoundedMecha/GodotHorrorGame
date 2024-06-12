@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dx6e2aakd1c1e"]
 
 [ext_resource type="Script" path="res://Scripts/Character.cs" id="1_e7wf0"]
-[ext_resource type="AudioStream" uid="uid://bw4vs8jcbf6l8" path="res://SoundFiles/740902__anio-official__gargargar.mp3" id="2_uhdlp"]
+[ext_resource type="AudioStream" uid="uid://lietceit4wh8" path="res://SoundFiles/740902__anio-official__gargargar.mp3" id="2_uhdlp"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_e5j7r"]
 
