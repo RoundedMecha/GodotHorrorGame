@@ -109,7 +109,7 @@ public partial class EnemyCharBod : CharacterBody3D
 					}
 					else if(PlayerInHearRangeFar == true || PlayerInSightRangeFar == true) //Player Is Within Rrange Begin Hunting
 					{
-						GD.Print("Hunting");
+						
 						if(CharacterScriptReference.Crouched == false)
 						{
 							CurrentState = States.Hunting;
@@ -120,7 +120,20 @@ public partial class EnemyCharBod : CharacterBody3D
 					}
 					
 				}
+				else if(PlayerInHearRangeFar == true || PlayerInSightRangeFar == true) // Player is obscured but can be heard Needs Better Implementation should only go to characters current position
+				{
+					var t = GetTree().GetNodesInGroup("Player")[0];
+					var CharacterScriptReference = (Character)t;
+					if(CharacterScriptReference.AudioStreamPlayer.Playing == true && CharacterScriptReference.AudioStreamPlayer.VolumeDb > 0)
+					{ 
+						CurrentState = States.Hunting;
+						NavAgent3D.SetTargetPosition(GetTree().GetNodesInGroup("Player")[0].GetNode<Camera3D>("Head/Camera3D").GlobalPosition);
+						Console.WriteLine("CAN HEAR PLAYER");
+					}
+						
+				}
 			}
+			
 			
 		}
 	

@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dx6e2aakd1c1e"]
+[gd_scene load_steps=12 format=3 uid="uid://dx6e2aakd1c1e"]
 
 [ext_resource type="Script" path="res://Scripts/Character.cs" id="1_e7wf0"]
+[ext_resource type="AudioStream" uid="uid://bw4vs8jcbf6l8" path="res://SoundFiles/740902__anio-official__gargargar.mp3" id="2_uhdlp"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_e5j7r"]
 
@@ -335,7 +336,7 @@ _data = {
 "unCrouchAnim": SubResource("Animation_1xxt3")
 }
 
-[node name="CharacterPlayer" type="CharacterBody3D" node_paths=PackedStringArray("Head", "Cam", "SubCam", "AnimPlayer", "shapeCast", "HoldItemSpace", "ControlCanvas") groups=["Player"]]
+[node name="CharacterPlayer" type="CharacterBody3D" node_paths=PackedStringArray("Head", "Cam", "SubCam", "AnimPlayer", "shapeCast", "HoldItemSpace", "ControlCanvas", "AudioStreamPlayer") groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.414105, 0)
 script = ExtResource("1_e7wf0")
 Head = NodePath("Head")
@@ -345,6 +346,7 @@ AnimPlayer = NodePath("AnimationPlayer")
 shapeCast = NodePath("ShapeCast3D")
 HoldItemSpace = NodePath("Head/Camera3D/HoldItemPos")
 ControlCanvas = NodePath("Control")
+AudioStreamPlayer = NodePath("AudioStreamPlayer3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.900667, 0)
@@ -435,6 +437,9 @@ offset_top = 278.0
 offset_right = 578.0
 offset_bottom = 309.0
 text = "TEST"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_uhdlp")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimationPlayerAnimationFinished"]
 [connection signal="pressed" from="Control/CanvasLayer/Button" to="." method="OnButtonPressed"]

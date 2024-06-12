@@ -65,7 +65,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.09095, -0.0226476, -11.116
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21.1089, 0)
 layers = 3
 
-[node name="CharacterPlayer" parent="." node_paths=PackedStringArray("Head", "Cam", "SubCam", "AnimPlayer", "shapeCast", "HoldItemSpace", "ControlCanvas") instance=ExtResource("3_1sq1o")]
+[node name="CharacterPlayer" parent="." node_paths=PackedStringArray("Head", "Cam", "SubCam", "AnimPlayer", "shapeCast", "HoldItemSpace", "ControlCanvas", "AudioStreamPlayer") instance=ExtResource("3_1sq1o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.3928, 0.391503, -0.769523)
 Head = NodePath("Head")
 Cam = NodePath("Head/Camera3D")
@@ -74,6 +74,7 @@ AnimPlayer = NodePath("AnimationPlayer")
 shapeCast = NodePath("ShapeCast3D")
 HoldItemSpace = NodePath("Head/Camera3D/HoldItemPos")
 ControlCanvas = NodePath("Control")
+AudioStreamPlayer = NodePath("AudioStreamPlayer3D")
 
 [node name="ItemPickUp" parent="." node_paths=PackedStringArray("ObjectMesh", "ShapeCast3DCheckForWorld") instance=ExtResource("4_x03dg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69793, 2.09231, -6.01924)

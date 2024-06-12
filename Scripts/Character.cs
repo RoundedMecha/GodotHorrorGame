@@ -32,6 +32,8 @@ public partial class Character : CharacterBody3D
 	public Node3D HoldItemSpace;
 	[Export]
 	Control ControlCanvas;
+	[Export]
+	public AudioStreamPlayer3D AudioStreamPlayer;
 
 	public void OnButtonPressed()
 	{
@@ -197,6 +199,12 @@ public partial class Character : CharacterBody3D
 				{
 					CheckForInteractable();
 
+				}
+				else if(@event.IsActionPressed("TestDirection"))
+				{
+					AudioStreamPlayer.Play();
+					AudioStreamPlayer.VolumeDb = 1;
+					GD.Print("TEST");
 				}	
 				break;
 			default:
