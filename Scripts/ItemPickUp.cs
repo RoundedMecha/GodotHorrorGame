@@ -17,6 +17,7 @@ public partial class ItemPickUp : CharacterBody3D
     {
 		ShapeCast3DCheckForWorld.AddException(GetNode<CollisionObject3D>("."));
 		ObjectMesh.Layers = 1;
+		ObjectMesh.GetChild<MeshInstance3D>(0).Layers = 1;
         base._Ready();
     }
 
@@ -26,7 +27,7 @@ public partial class ItemPickUp : CharacterBody3D
 		if (BeingHeld)
 		{
 			ObjectMesh.Layers = 2;
-			
+			ObjectMesh.GetChild<MeshInstance3D>(0).Layers = 2;
 			
 			
 		}
@@ -42,15 +43,12 @@ public partial class ItemPickUp : CharacterBody3D
 
 	
 
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
-		
+	
 
 			Velocity = velocity;
 			MoveAndSlide();
 		}
 
-		// Add the gravity.
 		
 	}
 }
