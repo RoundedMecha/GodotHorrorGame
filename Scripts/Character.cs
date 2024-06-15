@@ -239,6 +239,7 @@ public partial class Character : CharacterBody3D
 				{
 					CurrentState = PlayerStates.Playing;
 					ControlCanvas.GetChild(0).GetChild<TextEdit>(3).Visible = false;
+					ControlCanvas.GetChild(0).GetChild<TextEdit>(3).Clear();
 				}
 			}
 				break;
@@ -270,6 +271,8 @@ public partial class Character : CharacterBody3D
 
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
+		if(CurrentState != PlayerStates.Typing)
+		{
 		Vector2 inputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
 		Vector3 direction = (Head.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 		if (direction != Vector3.Zero)
@@ -281,6 +284,7 @@ public partial class Character : CharacterBody3D
 		{
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
 			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
+		}
 		}
 
 	
