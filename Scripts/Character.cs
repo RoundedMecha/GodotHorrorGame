@@ -37,6 +37,13 @@ public partial class Character : CharacterBody3D
 	Control ControlCanvas;
 	[Export]
 	public AudioStreamPlayer3D AudioStreamPlayer;
+	PlayerStates CurrentState;
+
+	enum PlayerStates
+	{
+		Typing,
+		Playing
+	}
 
 	public void OnButtonPressed()
 	{
@@ -155,6 +162,7 @@ public partial class Character : CharacterBody3D
 	public override void _Ready()
 	{
 		shapeCast.AddException(GetNode<CollisionObject3D>("."));
+		CurrentState = PlayerStates.Playing;
 	
 		
 	}
@@ -173,6 +181,8 @@ public partial class Character : CharacterBody3D
 				Cam.Rotation = CameraRot;
 				break;
 			case InputEventKey:
+			if(CurrentState == PlayerStates.Playing)
+			{
 				if(@event.IsActionPressed("Crouch")) //Handle Crouching
 				{
 					if (Input.IsActionPressed("Crouch"))
@@ -215,7 +225,22 @@ public partial class Character : CharacterBody3D
 					AudioStreamPlayer.Play();
 					AudioStreamPlayer.VolumeDb = 1;
 					GD.Print("TEST");
-				}	
+				}
+				else if(@event.IsActionPressed("ActivateKeyboard"))
+				{
+					CurrentState = PlayerStates.Typing;
+					ControlCanvas.GetChild(0).GetChild<TextEdit>(3).Visible = true;
+			
+				}
+			}
+			else
+			{
+				if(@event.IsActionPressed("ActivateKeyboard"))
+				{
+					CurrentState = PlayerStates.Playing;
+					ControlCanvas.GetChild(0).GetChild<TextEdit>(3).Visible = false;
+				}
+			}
 				break;
 			default:
 				break;
